@@ -1,0 +1,10 @@
+{
+  "Exfoliator": 0,
+  "Face Mask": 1,
+  "Toner": 2,
+  "Serum": 3,
+  "Moisturizer": 4,
+  "Eye Cream": 5,
+  "Cleanser": 6,
+  "Sunscreen": 7
+}
