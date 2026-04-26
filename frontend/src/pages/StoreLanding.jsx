@@ -289,7 +289,7 @@ const StoreLanding = () => {
                     className="w-full text-center py-2 text-[11px] uppercase tracking-[0.18em] text-white"
                     style={{ background: '#c9898a', fontFamily: 'Jost, sans-serif' }}
                 >
-                    Free shipping on orders over $5,000 &nbsp;|&nbsp; Use code <strong>GLOW10</strong> for 10% off your first order
+                    Free shipping on orders over $50 &nbsp;|&nbsp; Use code <strong>GLOW10</strong> for 10% off your first order
                 </div>
             </div>
 

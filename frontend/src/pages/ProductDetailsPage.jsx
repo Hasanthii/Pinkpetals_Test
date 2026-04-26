@@ -290,7 +290,7 @@ const ProductDetailsContent = () => {
                         <div className="flex items-center justify-between pt-4">
                             <div className="flex items-center gap-2 text-sm text-gray-500">
                                 <Truck size={16} />
-                                <span>Free shipping on orders over $5,000</span>
+                                <span>Free shipping on orders over $50</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-between">

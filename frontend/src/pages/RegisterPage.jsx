@@ -391,7 +391,7 @@ const RegisterPage = () => {
                         {[
                             { icon: <Sparkles size={18} />, title: '10% Off First Order', desc: 'Use code GLOW10' },
                             { icon: <Gift size={18} />, title: 'Free Samples', desc: 'With every purchase' },
-                            { icon: <Truck size={18} />, title: 'Free Shipping', desc: 'Orders over $5,000' },
+                            { icon: <Truck size={18} />, title: 'Free Shipping', desc: 'Orders over $50' },
                             { icon: <Shield size={18} />, title: 'Secure Checkout', desc: '100% protected' },
                         ].map((item, idx) => (
                             <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-white/20 transition-all duration-300">
