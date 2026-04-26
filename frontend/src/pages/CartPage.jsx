@@ -103,7 +103,7 @@ const CartContent = () => {
     };
 
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = subtotal > 5000 ? 0 : 500;
+    const shipping = subtotal > 50 ? 0 : 10;
     const total = subtotal + shipping;
 
     const handleCheckout = () => {
@@ -198,9 +198,9 @@ const CartContent = () => {
                                         )}
                                     </span>
                                 </div>
-                                {subtotal < 5000 && (
+                                {subtotal <= 50 && (
                                     <p className="text-xs text-green-600 bg-green-50 p-2 rounded-lg">
-                                        Add ${(5000 - subtotal).toLocaleString()} more for free shipping!
+                                        Add ${(50 - subtotal).toLocaleString()} more for free shipping!
                                     </p>
                                 )}
                             </div>

@@ -114,12 +114,7 @@ const ProductCard = ({ product, onClick, onAddToCart }) => {
 /* ─────────────────────────────────────────────────────────────────
    Static placeholder products
 ───────────────────────────────────────────────────────────────── */
-const STATIC_PRODUCTS = [
-    { id: 1, name: 'Snail Mucin Power Essence', brand: 'Cosrx', category: 'Serum', price: 25.00, stockQuantity: 20, imageUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&q=80' },
-    { id: 2, name: 'Water Sleeping Mask', brand: 'Laneige', category: 'Face Mask', price: 32.00, stockQuantity: 15, imageUrl: 'https://images.unsplash.com/photo-1617897903246-719242758050?w=400&q=80' },
-    { id: 3, name: 'Hyaluronic Acid 2% + B5', brand: 'The Ordinary', category: 'Serum', price: 9.00, stockQuantity: 30, imageUrl: 'https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&q=80' },
-    { id: 4, name: 'Daily Gentle Cleanser', brand: 'Cetaphil', category: 'Cleanser', price: 14.00, stockQuantity: 25, imageUrl: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&q=80' },
-];
+
 
 /* ─────────────────────────────────────────────────────────────────
    Category tiles data
@@ -193,12 +188,12 @@ const StoreLanding = () => {
 
     useEffect(() => {
         productApi.getAll()
-            .then(r => setProducts(r.data.length ? r.data.slice(0, 4) : STATIC_PRODUCTS))
-            .catch(() => setProducts(STATIC_PRODUCTS))
+            .then(r => setProducts(r.data.length ? r.data.slice(0, 4) : []))
+            .catch(() => setProducts([]))
             .finally(() => setLoading(false));
     }, []);
 
-    const displayProducts = products.length ? products : STATIC_PRODUCTS;
+    const displayProducts = products;
 
     return (
         <div style={{ fontFamily: 'Jost, sans-serif', background: '#fffaf9' }}>

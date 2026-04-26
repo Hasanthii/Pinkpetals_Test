@@ -3,10 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Flower2, AlertCircle, Sparkles, Truck, Shield, Gift, Star } from 'lucide-react';
 import { authApi, handleAuthSuccess } from '../services/authService.js';
 
-const HARDCODED_ADMIN = {
-    username: 'admin',
-    password: 'admin123'
-};
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -45,25 +41,6 @@ const LoginPage = () => {
         const identifier = formData.email.trim();
         const password = formData.password;
 
-        // Check hardcoded admin credentials
-        if (identifier === HARDCODED_ADMIN.username && password === HARDCODED_ADMIN.password) {
-            try {
-                const response = await authApi.login({ email: identifier, password: password });
-                if (response && response.token && response.user) {
-                    handleAuthSuccess(response);
-                    const redirectPath = getRedirectPath(response.user.role);
-                    navigate(redirectPath);
-                } else {
-                    throw new Error('Invalid response from server');
-                }
-            } catch (err) {
-                console.error('Login error:', err);
-                setError(err.message || 'Invalid credentials. Please try again.');
-            } finally {
-                setIsLoading(false);
-            }
-            return;
-        }
 
         // Try API login for real registered users
         try {

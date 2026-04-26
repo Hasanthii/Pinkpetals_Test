@@ -110,7 +110,7 @@ const CheckoutContent = () => {
     };
 
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = subtotal > 5000 ? 0 : 500;
+    const shipping = subtotal > 50 ? 0 : 10;
     const total = Math.max(0, subtotal + shipping - discount);
 
     const handlePlaceOrder = async () => {
