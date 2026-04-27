@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, ShoppingBag, Users, Package, Tag, Truck, User, Settings, LogOut, Flower2, ChevronRight, Star, Gift, Activity } from 'lucide-react';
+import { Home, ShoppingBag, Users, Package, Tag, Truck, User, Settings, LogOut, Flower2, ChevronRight, Star, Gift, Activity, Sparkles } from 'lucide-react';
 import { authApi } from '../services/authService.js';
 import { getUserInitials, getUserDisplayName } from '../types/user.js';
 
@@ -45,6 +45,7 @@ const SidebarLayout = ({ children }) => {
         { path: '/cart', icon: ShoppingBag, label: 'My Bag', color: 'text-warm-rose' },
         { path: '/orders', icon: Tag, label: 'My Orders', color: 'text-soft-rose' },
         { path: '/profile', icon: User, label: 'My Profile', color: 'text-primary-rose' },
+        { path: '/profile/skin', icon: Sparkles, label: 'Skin Profile', color: 'text-primary-rose' },
         { path: '/reviews', icon: Star, label: 'My Reviews', color: 'text-primary-rose' },
     ];
 

@@ -49,10 +49,10 @@ const CustomerDashboardContent = () => {
     ];
 
     const quickActions = [
-        { icon: ShoppingBag, label: 'Browse Shop', desc: 'Explore our latest products', path: '/shop', color: '#B76E79' },
-        { icon: Package, label: 'My Bag', desc: 'View your cart', path: '/cart', color: '#c9898a' },
-        { icon: Truck, label: 'My Orders', desc: 'Track your deliveries', path: '/orders', color: '#d4879a' },
-        { icon: Star, label: 'Write Review', desc: 'Share your experience', path: '/reviews', color: '#d4a0a0' },
+        { icon: Sparkles, label: 'Skin Profile', desc: 'Update your skin details', path: '/profile/skin', color: '#B76E79' },
+        { icon: ShoppingBag, label: 'Browse Shop', desc: 'Explore our latest products', path: '/shop', color: '#c9898a' },
+        { icon: Package, label: 'My Bag', desc: 'View your cart', path: '/cart', color: '#d4879a' },
+        { icon: Truck, label: 'My Orders', desc: 'Track your deliveries', path: '/orders', color: '#d4a0a0' },
     ];
 
     return (
