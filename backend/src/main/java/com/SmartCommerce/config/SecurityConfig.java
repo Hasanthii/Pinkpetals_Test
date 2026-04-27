@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/suppliers/**").authenticated()
                 .requestMatchers("/api/orders/**").authenticated()
                 .requestMatchers("/api/procurement-orders/**").authenticated()
+                .requestMatchers("/api/recommend/**").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

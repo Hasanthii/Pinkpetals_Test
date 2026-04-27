@@ -1,40 +1,34 @@
-const API_URL = '/api/recommend';
+import api from './api';
+
+const API_URL = '/recommend';
 
 /**
  * Fetch product recommendation from backend API
  */
 export const getProductRecommendation = async (brandName, subCategory, skinType, skinTone, eyeColor, hairColor, priceUsd) => {
     try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Note: sentimentScore is mocked here as 0.75 for example, or passed if available.
-            body: JSON.stringify({
-                brandName,
-                subCategory,
-                skinType,
-                skinTone,
-                eyeColor,
-                hairColor,
-                priceUsd,
-                sentimentScore: 0.75 
-            })
+        const response = await api.post(API_URL, {
+            brandName,
+            subCategory,
+            skinType,
+            skinTone,
+            eyeColor,
+            hairColor,
+            priceUsd,
+            sentimentScore: 0.75 
         });
 
-        // Handle ML Server offline / unavailable
-        if (response.status === 503) {
+        return response.data;
+    } catch (error) {
+        // Axios errors are handled by the interceptor in api.js, 
+        // but we can add specific logic here if needed.
+        console.error("Error in getProductRecommendation:", error);
+        
+        // Handle ML Server offline / unavailable (status 503)
+        if (error.status === 503) {
             throw new Error("Recommendation service is currently unavailable.");
         }
-
-        if (!response.ok) {
-            throw new Error("Failed to configure recommendation request.");
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error("Error in getProductRecommendation:", error);
+        
         throw error;
     }
 };
@@ -44,10 +38,8 @@ export const getProductRecommendation = async (brandName, subCategory, skinType,
  */
 export const getSkinTypes = async () => {
     try {
-        const response = await fetch(`${API_URL}/skin-types`);
-        if (!response.ok) throw new Error("Failed to fetch skin types.");
-        const data = await response.json();
-        return data.skinTypes || []; 
+        const response = await api.get(`${API_URL}/skin-types`);
+        return response.data.skinTypes || []; 
     } catch (error) {
         console.error("Error in getSkinTypes:", error);
         return [];
@@ -59,10 +51,8 @@ export const getSkinTypes = async () => {
  */
 export const getSkinTones = async () => {
     try {
-        const response = await fetch(`${API_URL}/skin-tones`);
-        if (!response.ok) throw new Error("Failed to fetch skin tones.");
-        const data = await response.json();
-        return data.skinTones || []; 
+        const response = await api.get(`${API_URL}/skin-tones`);
+        return response.data.skinTones || []; 
     } catch (error) {
         console.error("Error in getSkinTones:", error);
         return [];
