@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Star, Package, Heart, CreditCard, Truck, ArrowRight, Sparkles } from 'lucide-react';
+import { ShoppingBag, Star, Package, CreditCard, Truck, ArrowRight, Sparkles } from 'lucide-react';
 import { orderApi } from '../services/orderService';
 import { cartService } from '../services/cartService';
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
@@ -44,7 +44,7 @@ const CustomerDashboardContent = () => {
     const stats = [
         { icon: ShoppingBag, label: 'Total Orders', value: orders.length.toString(), color: 'from-pink-400 to-rose-500' },
         { icon: Star, label: 'My Reviews', value: '0', color: 'from-amber-400 to-orange-500' },
-        { icon: Heart, label: 'In Bag', value: cartCount.toString(), color: 'from-red-400 to-pink-500' },
+        { icon: ShoppingBag, label: 'In Bag', value: cartCount.toString(), color: 'from-pink-400 to-rose-500' },
         { icon: CreditCard, label: 'Points Earned', value: '0', color: 'from-green-400 to-emerald-500' },
     ];
 

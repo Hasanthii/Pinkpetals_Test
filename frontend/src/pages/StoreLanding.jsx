@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     ArrowRight, Star, ShoppingBag, Instagram, Facebook, Twitter,
-    Shield, Truck, Gift, ChevronRight, Heart, Search, Menu, X, Flower2, UserCircle,
+    Shield, Truck, Gift, ChevronRight, Search, Menu, X, Flower2, UserCircle,
 } from 'lucide-react';
 import { productApi } from '../services/api';
 import { cartService } from '../services/cartService';
@@ -38,7 +38,6 @@ const StarRow = ({ n = 5 }) => (
    Product Card
 ───────────────────────────────────────────────────────────────── */
 const ProductCard = ({ product, onClick, onAddToCart }) => {
-    const [wished, setWished] = useState(false);
     const [imgError, setImgError] = useState(false);
     return (
         <div
@@ -46,15 +45,6 @@ const ProductCard = ({ product, onClick, onAddToCart }) => {
             className="group relative bg-white rounded-2xl overflow-hidden cursor-pointer"
             style={{ boxShadow: '0 4px 24px rgba(183,110,121,0.10)' }}
         >
-            <button
-                onClick={e => { e.stopPropagation(); setWished(w => !w); }}
-                className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm transition-all duration-200 hover:scale-110"
-            >
-                <Heart
-                    size={15}
-                    className={wished ? 'fill-[#B76E79] text-[#B76E79]' : 'text-[#B76E79]'}
-                />
-            </button>
 
             <div
                 className="relative h-56 bg-gradient-to-br from-[#fdeef0] to-[#f5d5d8] overflow-hidden flex items-center justify-center"
@@ -247,13 +237,6 @@ const StoreLanding = () => {
                         </button>
                         <button
                             onClick={requireCart}
-                            className="w-8 h-8 rounded-full flex items-center justify-center text-[#6b3040] hover:text-[#B76E79] hover:bg-[#fdeef0] transition-all"
-                            aria-label="Wishlist"
-                        >
-                            <Heart size={16} />
-                        </button>
-                        <button
-                            onClick={requireCart}
                             className="relative w-8 h-8 rounded-full flex items-center justify-center text-[#6b3040] hover:text-[#B76E79] hover:bg-[#fdeef0] transition-all"
                             aria-label="Cart"
                         >
@@ -376,29 +359,6 @@ const StoreLanding = () => {
                             </button>
                         </div>
 
-                        {/* Trust row */}
-                        <div className="flex items-center gap-6 mt-10">
-                            {[
-                                { num: '10K+', label: 'Happy Customers' },
-                                { num: '500+', label: 'Products' },
-                                { num: '4.9', label: 'Avg Rating' },
-                            ].map(s => (
-                                <div key={s.label} className="flex flex-col">
-                                    <span
-                                        className="text-xl font-semibold text-[#3d1a22]"
-                                        style={{ fontFamily: 'Playfair Display, serif' }}
-                                    >
-                                        {s.num}
-                                    </span>
-                                    <span
-                                        className="text-[10px] uppercase tracking-widest text-[#8a4a58]"
-                                        style={{ fontFamily: 'Jost, sans-serif' }}
-                                    >
-                                        {s.label}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
                     </div>
                 </div>
             </section>

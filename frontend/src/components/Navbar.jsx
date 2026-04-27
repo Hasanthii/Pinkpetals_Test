@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    ShoppingBag, Search, Heart, Flower2, UserCircle,
+    ShoppingBag, Search, Flower2, UserCircle,
 } from 'lucide-react';
 import { cartService } from '../services/cartService';
 import MiniCartDrawer from './MiniCartDrawer';
@@ -100,13 +100,6 @@ const Navbar = () => {
                             aria-label="Search products"
                         >
                             <Search size={16} />
-                        </button>
-                        <button
-                            onClick={openCart}
-                            className="w-8 h-8 rounded-full flex items-center justify-center text-[#6b3040] hover:text-[#B76E79] hover:bg-[#fdeef0] transition-all"
-                            aria-label="Wishlist"
-                        >
-                            <Heart size={16} />
                         </button>
                         <button
                             onClick={openCart}

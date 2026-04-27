@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Star, Heart, ShoppingBag } from 'lucide-react';
+import { Star, ShoppingBag } from 'lucide-react';
 import SkinProfileBadge from './SkinProfileBadge';
 
 const StarRow = ({ n = 4 }) => (
@@ -16,7 +16,6 @@ const StarRow = ({ n = 4 }) => (
 );
 
 const ProductCard = ({ product, onAddToCart, onClick, showAdminActions, onEdit, onDelete, recommendationStatus }) => {
-    const [wished, setWished] = useState(false);
     const [imgError, setImgError] = useState(false);
     const navigate = useNavigate();
 
@@ -30,10 +29,6 @@ const ProductCard = ({ product, onAddToCart, onClick, showAdminActions, onEdit, 
         }
     };
 
-    const handleWishlist = (e) => {
-        e.stopPropagation();
-        setWished(w => !w);
-    };
 
     const handleAddToCart = (e) => {
         e.stopPropagation();
@@ -48,15 +43,6 @@ const ProductCard = ({ product, onAddToCart, onClick, showAdminActions, onEdit, 
             className="group relative bg-white rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             style={{ boxShadow: '0 4px 24px rgba(183,110,121,0.10)' }}
         >
-            <button
-                onClick={handleWishlist}
-                className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm transition-all duration-200 hover:scale-110"
-            >
-                <Heart
-                    size={15}
-                    className={wished ? 'fill-[#B76E79] text-[#B76E79] transition-colors' : 'text-[#B76E79]'}
-                />
-            </button>
 
             <div
                 className="relative h-56 overflow-hidden flex items-center justify-center"
