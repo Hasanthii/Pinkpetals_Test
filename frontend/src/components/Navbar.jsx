@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    ShoppingBag, Search, Flower2, UserCircle,
+    ShoppingBag, Search, Flower2, User,
 } from 'lucide-react';
 import { cartService } from '../services/cartService';
 import MiniCartDrawer from './MiniCartDrawer';
@@ -116,11 +116,13 @@ const Navbar = () => {
                         {isLoggedIn ? (
                             <button
                                 onClick={() => navigate(accountPath)}
-                                title={storedUser?.firstName ? `Hi, ${storedUser.firstName}` : 'My Account'}
-                                className="ml-1 w-9 h-9 rounded-full flex items-center justify-center text-[#B76E79] hover:bg-[#fdeef0] border border-[#f5d5d8] hover:border-[#B76E79] transition-all duration-200 hover:scale-110"
+                                className="flex items-center gap-2.5 ml-1 px-4 py-2 rounded-full text-[#B76E79] hover:bg-[#fdeef0] border border-[#f5d5d8] hover:border-[#B76E79] transition-all duration-200"
                                 aria-label="My Account"
                             >
-                                <UserCircle size={22} />
+                                <User size={18} />
+                                <span className="text-xs font-medium whitespace-nowrap" style={{ fontFamily: 'Jost, sans-serif' }}>
+                                    Hi, {storedUser?.firstName || 'User'}
+                                </span>
                             </button>
                         ) : (
                             <button
