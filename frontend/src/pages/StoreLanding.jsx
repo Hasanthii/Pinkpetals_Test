@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     ArrowRight, Star, ShoppingBag, Instagram, Facebook, Twitter,
-    Shield, Truck, Gift, ChevronRight, Search, Menu, X, Flower2, UserCircle,
+    Shield, Truck, Gift, ChevronRight, Search, Menu, X, Flower2, User, Sparkles
 } from 'lucide-react';
 import { productApi } from '../services/api';
 import { cartService } from '../services/cartService';
 import MiniCartDrawer from '../components/MiniCartDrawer';
+import { useSkinProfile } from '../context/SkinProfileContext';
 
 /* ─────────────────────────────────────────────────────────────────
    Google Fonts injection (Playfair Display + Jost)
@@ -128,6 +129,7 @@ const StoreLanding = () => {
     const [cartOpen, setCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState(() => cartService.getCart());
     const [email, setEmail] = useState('');
+    const { skinProfile } = useSkinProfile();
 
     const refreshCart = () => {
         setCartItems(cartService.getCart());
@@ -250,11 +252,13 @@ const StoreLanding = () => {
                         {isLoggedIn ? (
                             <button
                                 onClick={() => navigate(accountPath)}
-                                title={storedUser?.firstName ? `Hi, ${storedUser.firstName}` : 'My Account'}
-                                className="ml-1 w-9 h-9 rounded-full flex items-center justify-center text-[#B76E79] hover:bg-[#fdeef0] border border-[#f5d5d8] hover:border-[#B76E79] transition-all duration-200 hover:scale-110"
+                                className="flex items-center gap-2.5 ml-1 px-4 py-2 rounded-full text-[#B76E79] hover:bg-[#fdeef0] border border-[#f5d5d8] hover:border-[#B76E79] transition-all duration-200"
                                 aria-label="My Account"
                             >
-                                <UserCircle size={22} />
+                                <User size={18} />
+                                <span className="text-xs font-medium whitespace-nowrap" style={{ fontFamily: 'Jost, sans-serif' }}>
+                                    Hi, {storedUser?.firstName || 'User'}
+                                </span>
                             </button>
                         ) : (
                             <button
@@ -422,81 +426,94 @@ const StoreLanding = () => {
             </section>
 
             {/* ════════════════════════════════════════════════════
-                BESTSELLERS
+                SKIN PROFILE QUICK ACCESS
             ════════════════════════════════════════════════════ */}
-            <section className="py-16 px-6" style={{ background: '#fff5f6' }}>
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-10">
-                        <p className="text-xs uppercase tracking-[0.22em] text-[#B76E79] mb-2"
-                            style={{ fontFamily: 'Jost, sans-serif' }}>
-                            Customer Favourites
-                        </p>
-                        <h2 style={{
-                            fontFamily: 'Playfair Display, serif',
-                            fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
-                            color: '#3d1a22',
-                            fontWeight: 600,
-                        }}>
-                            Bestsellers
-                        </h2>
-                        <div className="mx-auto mt-3 w-10 h-0.5 rounded-full" style={{ background: '#B76E79' }} />
-                    </div>
-
-                    {/* Tabs */}
-                    <div className="flex justify-center gap-6 mb-8">
-                        {['Best Sellers', 'New Arrivals', 'Super Savers'].map((tab, i) => (
+            <section className="py-20 px-6" style={{ background: '#fff5f6' }}>
+                <div className="max-w-4xl mx-auto text-center">
+                    {!skinProfile ? (
+                        <div className="bg-white p-12 rounded-[3rem] shadow-xl border border-pink-100 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-8 opacity-10">
+                                <Sparkles size={120} className="text-[#B76E79]" />
+                            </div>
+                            
+                            <p className="text-xs uppercase tracking-[0.25em] text-[#B76E79] mb-4 font-semibold"
+                                style={{ fontFamily: 'Jost, sans-serif' }}>
+                                Personalized for You
+                            </p>
+                            <h2 className="mb-6" style={{
+                                fontFamily: 'Playfair Display, serif',
+                                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                                color: '#3d1a22',
+                                fontWeight: 700,
+                                lineHeight: 1.2
+                            }}>
+                                Find Your Perfect <br/>
+                                <em className="italic text-[#B76E79]">Skin Match</em>
+                            </h2>
+                            <p className="text-gray-600 mb-10 max-w-lg mx-auto leading-relaxed"
+                                style={{ fontFamily: 'Jost, sans-serif' }}>
+                                Complete your skin profile in just 30 seconds to unlock AI-powered recommendations tailored specifically to your skin type and tone.
+                            </p>
+                            
                             <button
-                                key={tab}
-                                className={`text-xs uppercase tracking-widest pb-1 transition-all duration-200 ${i === 0 ? 'text-[#B76E79] border-b-2 border-[#B76E79]' : 'text-gray-400 hover:text-[#B76E79]'}`}
-                                style={{ fontFamily: 'Jost, sans-serif' }}
+                                onClick={() => {
+                                    if (isLoggedIn) {
+                                        navigate('/profile/skin');
+                                    } else {
+                                        setToast('Please sign in to save your skin profile.');
+                                        setTimeout(() => setToast(''), 3000);
+                                        navigate('/login');
+                                    }
+                                }}
+                                className="inline-flex items-center gap-3 text-white text-sm font-bold px-10 py-4 rounded-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                                style={{
+                                    background: 'linear-gradient(135deg, #b76e79 0%, #c9898a 100%)',
+                                    fontFamily: 'Jost, sans-serif',
+                                    letterSpacing: '0.05em',
+                                    boxShadow: '0 10px 30px rgba(183,110,121,0.3)'
+                                }}
                             >
-                                {tab}
+                                Build My Profile <Sparkles size={18} />
                             </button>
-                        ))}
-                    </div>
-
-                    {loading ? (
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            {[...Array(4)].map((_, i) => (
-                                <div key={i} className="bg-white rounded-2xl p-4 animate-pulse h-72" />
-                            ))}
                         </div>
                     ) : (
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                            {displayProducts.map(p => (
-                                <ProductCard
-                                    key={p.id}
-                                    product={p}
-                                    onClick={() => {
-                                        const token = localStorage.getItem('pinkpetals_token');
-                                        if (token) {
-                                            navigate('/login');
-                                        } else {
-                                            navigate('/login');
-                                        }
-                                    }}
-                                    onAddToCart={requireCart}
-                                />
-                            ))}
+                        <div className="bg-white/40 p-12 rounded-[3rem] border border-pink-100/50">
+                            <div className="flex justify-center mb-6">
+                                <div className="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center">
+                                    <Sparkles size={30} className="text-[#B76E79]" />
+                                </div>
+                            </div>
+                            <h2 className="mb-3" style={{
+                                fontFamily: 'Playfair Display, serif',
+                                fontSize: '2.2rem',
+                                color: '#3d1a22',
+                                fontWeight: 700
+                            }}>
+                                Welcome Back, {storedUser?.firstName || 'Beautiful'}
+                            </h2>
+                            <p className="text-gray-500 mb-8" style={{ fontFamily: 'Jost, sans-serif' }}>
+                                Your AI-personalized experience is active. <br/>
+                                <span className="text-xs uppercase tracking-widest text-[#B76E79] font-semibold">
+                                    {skinProfile.skinType} • {skinProfile.skinTone} • {skinProfile.eyeColor}
+                                </span>
+                            </p>
+                            <div className="flex justify-center gap-4">
+                                <button
+                                    onClick={() => navigate('/shop')}
+                                    className="text-xs font-bold uppercase tracking-widest text-[#B76E79] border-b border-[#B76E79] pb-1 hover:text-[#9e5c67] hover:border-[#9e5c67] transition-all"
+                                >
+                                    Explore My Matches
+                                </button>
+                                <span className="text-pink-200">|</span>
+                                <button
+                                    onClick={() => navigate('/profile/skin')}
+                                    className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-[#B76E79] transition-all"
+                                >
+                                    Update Profile
+                                </button>
+                            </div>
                         </div>
                     )}
-
-                    <div className="text-center mt-10">
-                        <button
-                            onClick={() => {
-                                const token = localStorage.getItem('pinkpetals_token');
-                                if (token) {
-                                    navigate('/login');
-                                } else {
-                                    navigate('/login');
-                                }
-                            }}
-                            className="inline-flex items-center gap-2 text-sm font-medium px-8 py-3 rounded-full border border-[#B76E79] text-[#B76E79] hover:bg-[#B76E79] hover:text-white transition-all duration-200"
-                            style={{ fontFamily: 'Jost, sans-serif', letterSpacing: '0.05em' }}
-                        >
-                            View All Products <ArrowRight size={14} />
-                        </button>
-                    </div>
                 </div>
             </section>
 
