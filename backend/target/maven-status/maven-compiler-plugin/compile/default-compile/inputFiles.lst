@@ -8,6 +8,7 @@ C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\Sma
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\ProcurementController.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\ProductController.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\PromotionController.java
+C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\RecommendationController.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\ReviewController.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\SupplierController.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\controller\UserController.java
@@ -34,6 +35,8 @@ C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\Sma
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\ProductRatingDTO.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\PromotionDTO.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\PromotionUsageDTO.java
+C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\RecommendationRequest.java
+C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\RecommendationResponse.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\RecordPromotionUsageRequest.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\RegisterRequestDTO.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\dto\ReviewDTO.java
@@ -92,6 +95,7 @@ C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\Sma
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\MlPredictionService.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\OrderService.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\ProcurementService.java
+C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\ProductRecommendationService.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\ProductService.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\PromotionService.java
 C:\Users\Hasanthi\Documents\GitHub\Pinkpetals_Test\backend\src\main\java\com\SmartCommerce\service\PromotionUsageService.java

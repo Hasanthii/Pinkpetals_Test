@@ -6,6 +6,7 @@ import { reviewApi } from '../services/reviewService';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { Star, ArrowLeft, ShoppingBag, Check, Truck, Shield, RotateCcw, MessageSquare } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import ProductRecommendation from '../components/ProductRecommendation';
 
 const ProductDetailsContent = () => {
     const { id } = useParams();
@@ -250,6 +251,12 @@ const ProductDetailsContent = () => {
                             )}
                         </div>
 
+                        <ProductRecommendation 
+                            brandName={product.brand || product.category}
+                            subCategory={product.category}
+                            priceUsd={product.price}
+                        />
+
                         {!isOutOfStock && (
                             <div className="flex items-center gap-4">
                                 <div className="flex items-center border rounded-xl" style={{ borderColor: '#f5d5d8' }}>
@@ -290,7 +297,7 @@ const ProductDetailsContent = () => {
                         <div className="flex items-center justify-between pt-4">
                             <div className="flex items-center gap-2 text-sm text-gray-500">
                                 <Truck size={16} />
-                                <span>Free shipping on orders over $50</span>
+                                <span>Free shipping on orders over $5,000</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-between">

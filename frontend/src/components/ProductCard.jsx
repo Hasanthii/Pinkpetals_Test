@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Star, Heart, ShoppingBag } from 'lucide-react';
+import SkinProfileBadge from './SkinProfileBadge';
 
 const StarRow = ({ n = 4 }) => (
     <div className="flex gap-0.5">
@@ -14,7 +15,7 @@ const StarRow = ({ n = 4 }) => (
     </div>
 );
 
-const ProductCard = ({ product, onAddToCart, onClick, showAdminActions, onEdit, onDelete }) => {
+const ProductCard = ({ product, onAddToCart, onClick, showAdminActions, onEdit, onDelete, recommendationStatus }) => {
     const [wished, setWished] = useState(false);
     const [imgError, setImgError] = useState(false);
     const navigate = useNavigate();
@@ -117,6 +118,14 @@ const ProductCard = ({ product, onAddToCart, onClick, showAdminActions, onEdit, 
                     {product.name}
                 </h3>
                 <StarRow n={4} />
+                <div className="mt-2 text-left">
+                    <SkinProfileBadge 
+                        brandName={product.brand || product.category}
+                        subCategory={product.category}
+                        priceUsd={product.price}
+                        precomputedStatus={recommendationStatus}
+                    />
+                </div>
                 <div className="flex items-center justify-between mt-3">
                     <p
                         className="font-semibold text-[#B76E79] text-sm"

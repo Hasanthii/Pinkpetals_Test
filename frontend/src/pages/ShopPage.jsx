@@ -9,8 +9,23 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import { Sparkles, ShoppingBag } from 'lucide-react';
 import MiniCartDrawer from '../components/MiniCartDrawer';
 import Navbar from '../components/Navbar';
+import { useSkinProfile } from '../context/SkinProfileContext';
+import { getBatchProductRecommendations } from '../services/recommendationService';
 
-
+const STATIC_PRODUCTS = [
+    { id: 1, name: 'Radiance Renewal Serum', brand: 'Pink Petals', category: 'Serum', price: 3500, stockQuantity: 20, imageUrl: '' },
+    { id: 2, name: 'HydroSilk Moisturizer', brand: 'Pink Petals', category: 'Moisturizer', price: 2800, stockQuantity: 15, imageUrl: '' },
+    { id: 3, name: 'Vellose Lip Nectar', brand: 'Pink Petals', category: 'Other', price: 1200, stockQuantity: 30, imageUrl: '' },
+    { id: 4, name: 'Botanic Cleanse Gel', brand: 'Pink Petals', category: 'Cleanser', price: 1900, stockQuantity: 25, imageUrl: '' },
+    { id: 5, name: 'Velvet Rose Face Oil', brand: 'Pink Petals', category: 'Oil', price: 2500, stockQuantity: 18, imageUrl: '' },
+    { id: 6, name: 'Silk Essence Sunscreen SPF50', brand: 'Pink Petals', category: 'Sunscreen', price: 2200, stockQuantity: 22, imageUrl: '' },
+    { id: 7, name: 'Floral Body Lotion', brand: 'Pink Petals', category: 'Body Care', price: 1600, stockQuantity: 35, imageUrl: '' },
+    { id: 8, name: 'Rose Hair Serum', brand: 'Pink Petals', category: 'Hair Care', price: 2800, stockQuantity: 22, imageUrl: '' },
+    { id: 9, name: 'Hydrating Rose Toner', brand: 'Pink Petals', category: 'Toner', price: 1500, stockQuantity: 40, imageUrl: '' },
+    { id: 10, name: 'Pink Clay Detox Mask', brand: 'Pink Petals', category: 'Mask', price: 1800, stockQuantity: 25, imageUrl: '' },
+    { id: 11, name: 'Daily Gentle Cleanser', brand: 'Pink Petals', category: 'Cleanser', price: 1200, stockQuantity: 50, imageUrl: '' },
+    { id: 12, name: 'Vitamin C Brightening Serum', brand: 'Pink Petals', category: 'Serum', price: 3800, stockQuantity: 15, imageUrl: '' },
+];
 
 const sortProducts = (products, sortBy) => {
     if (!products || products.length === 0) return [];
@@ -38,6 +53,8 @@ const ShopPageContent = () => {
     const [cartOpen, setCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState(() => cartService.getCart());
     const [cartCount, setCartCount] = useState(() => cartService.getCartItemCount());
+    const { skinProfile } = useSkinProfile();
+    const [recommendations, setRecommendations] = useState({});
 
     const refreshCart = () => {
         setCartItems(cartService.getCart());
@@ -55,9 +72,9 @@ const ShopPageContent = () => {
         setError(null);
         try {
             const data = await ProductService.getAll();
-            setProducts(data && data.length > 0 ? data : []);
+            setProducts(data && data.length > 0 ? data : STATIC_PRODUCTS);
         } catch (err) {
-            setProducts([]);
+            setProducts(STATIC_PRODUCTS);
         } finally {
             setLoading(false);
         }
@@ -66,6 +83,18 @@ const ShopPageContent = () => {
     useEffect(() => {
         fetchProducts();
     }, [fetchProducts]);
+
+    useEffect(() => {
+        let isMounted = true;
+        const fetchRecommendations = async () => {
+            if (products.length > 0 && skinProfile) {
+                const results = await getBatchProductRecommendations(products, skinProfile);
+                if (isMounted) setRecommendations(results);
+            }
+        };
+        fetchRecommendations();
+        return () => { isMounted = false; };
+    }, [products, skinProfile]);
 
     const handleSearch = useCallback(async (query) => {
         setSearchQuery(query);
@@ -78,7 +107,10 @@ const ShopPageContent = () => {
             const data = await ProductService.search(query);
             setProducts(data || []);
         } catch {
-            setProducts([]);
+            setProducts(STATIC_PRODUCTS.filter(p =>
+                p.name.toLowerCase().includes(query.toLowerCase()) ||
+                p.category.toLowerCase().includes(query.toLowerCase())
+            ));
         } finally {
             setLoading(false);
         }
@@ -95,7 +127,7 @@ const ShopPageContent = () => {
             const data = await ProductService.getByCategory(category);
             setProducts(data || []);
         } catch {
-            setProducts([]);
+            setProducts(STATIC_PRODUCTS.filter(p => p.category.toLowerCase() === category.toLowerCase()));
         } finally {
             setLoading(false);
         }
@@ -198,6 +230,7 @@ const ShopPageContent = () => {
                                     key={p.id}
                                     product={p}
                                     onAddToCart={handleAddToCart}
+                                    recommendationStatus={recommendations[p.id]}
                                 />
                             ))}
                         </div>
