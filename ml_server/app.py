@@ -4,10 +4,10 @@ import json
 import numpy as np
 from pathlib import Path
 from flask_cors import CORS
-CORS(app)
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 
 BASE = Path(__file__).parent
 
