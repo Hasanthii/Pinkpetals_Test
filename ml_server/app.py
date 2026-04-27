@@ -21,8 +21,8 @@ reviews_scaler   = joblib.load(BASE / 'reviews_scaler.pkl')
 reviews_encoders = joblib.load(BASE / 'reviews_label_encoders.pkl')
 cat_avg_price    = json.loads((BASE / 'reviews_cat_avg_price.json').read_text())
 
-print("✓ Sales model loaded")
-print("✓ Reviews recommendation model loaded")
+print("Sales model loaded")
+print("Reviews recommendation model loaded")
 
 # ═══════════════════════════════════════════════════════════════════════
 # HEALTH CHECK

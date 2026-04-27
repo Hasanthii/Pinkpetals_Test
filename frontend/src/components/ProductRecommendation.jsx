@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSkinProfile } from '../context/SkinProfileContext';
-import { getProductRecommendation, getSkinTypes, getSkinTones } from '../services/recommendationService';
+import { getProductRecommendation } from '../services/recommendationService';
 
 const ProductRecommendation = ({ brandName, subCategory, priceUsd }) => {
     const { skinProfile } = useSkinProfile();
@@ -11,33 +11,16 @@ const ProductRecommendation = ({ brandName, subCategory, priceUsd }) => {
     const [eyeColor, setEyeColor] = useState(skinProfile?.eyeColor || '');
     const [hairColor, setHairColor] = useState(skinProfile?.hairColor || '');
 
-    // Options from API
-    const [skinTypeOptions, setSkinTypeOptions] = useState([]);
-    const [skinToneOptions, setSkinToneOptions] = useState([]);
-
     // Hardcoded options as specified
-    const eyeColorOptions = ["Brown", "Blue", "Green", "Hazel", "Grey"];
-    const hairColorOptions = ["Black", "Brown", "Blonde", "Red", "Grey"];
+    const skinTypeOptions = ["Combination", "Normal", "Dry", "Oily"];
+    const skinToneOptions = ["Fair", "Light", "Light Medium", "Fair Light", "Medium Tan", "Medium", "Tan", "Deep", "Rich", "Porcelain", "Dark", "Olive", "Not Sure"];
+    const eyeColorOptions = ["Brown", "Green", "Blue", "Hazel", "Grey/Gray"];
+    const hairColorOptions = ["Black", "Brown", "Blonde", "Auburn", "Red", "Gray", "Brunette"];
 
     // UI States
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
-
-    // Fetch dynamic options
-    useEffect(() => {
-        const fetchOptions = async () => {
-            try {
-                const types = await getSkinTypes();
-                const tones = await getSkinTones();
-                setSkinTypeOptions(types);
-                setSkinToneOptions(tones);
-            } catch (err) {
-                console.error("Failed to load options", err);
-            }
-        };
-        fetchOptions();
-    }, []);
 
     // Auto-run if profile is completely filled
     useEffect(() => {
