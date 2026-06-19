@@ -68,14 +68,10 @@ def predict_sales():
             date.weekday(),
             date.day,
             date.month,
-            date.year,
-            (date.month - 1) // 3 + 1,   # quarter
             lag_revenue1,
             rolling_rev7,
-            0.0,                           # rolling_rev_30
             relative_price_index,
-            is_discounted,
-            1                              # units_sold default
+            is_discounted
         ]])
 
         prediction = float(sales_model.predict(features)[0])
